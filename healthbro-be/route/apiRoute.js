@@ -1,7 +1,7 @@
 const express = require("express");
 const apiController = require("../controller/apiController");
-const authController = require("../controller/authController");
 const tokenDecoder = require("../middleware/tokenDecoder");
+const dbUtil = require("../Database/util");
 
 const router = express.Router();
 
@@ -28,7 +28,16 @@ router.get("/recipeSearch", async (req, res, next) => {
 //post recipe ids into user collection
 router
   .route("/favouriteRecipe")
-  .get(tokenDecoder, (req, res, next) => {})
-  .post(tokenDecoder, (req, res, next) => {});
+  .get(tokenDecoder, async (req, res, next) => {
+    const recipes = await dbUtil.getUserRecipeList(res.user.userId);
+    const query = `/recipes/informationBulk?ids=${recipes.join(",")}`;
+    const data = await apiController(query);
+    res.send(data);
+  })
+  .post(tokenDecoder, (req, res, next) => {
+    const { recipeId } = req.body;
+    const userId = res.user.userId;
+    dbUtil.addOrRemoveRecipes(userId, recipeId, res);
+  });
 
 module.exports = router;

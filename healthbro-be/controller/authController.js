@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
  * @returns {string} JWT token
  */
 exports.generateToken = (data) => {
-  const token = jwt.sign(data.toJSON(), process.env.JWT, {
+  const token = jwt.sign(data, process.env.JWT, {
     expiresIn: "7d",
   });
   return token;
