@@ -1,5 +1,7 @@
 const express = require("express");
 const apiController = require("../controller/apiController");
+const authController = require("../controller/authController");
+const tokenDecoder = require("../middleware/tokenDecoder");
 
 const router = express.Router();
 
@@ -23,6 +25,10 @@ router.get("/recipeSearch", async (req, res, next) => {
 });
 
 //get all recipes that user liked
-router.get("/favouriteRecipes", async (req, res, next) => {});
+//post recipe ids into user collection
+router
+  .route("/favouriteRecipe")
+  .get(tokenDecoder, (req, res, next) => {})
+  .post(tokenDecoder, (req, res, next) => {});
 
 module.exports = router;

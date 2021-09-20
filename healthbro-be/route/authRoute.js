@@ -7,7 +7,7 @@ const isTokenValid = require("../middleware/isTokenValid");
 //sign up
 router.post("/signUp", async (req, res, next) => {
   const { name, email, password } = req.body;
-  await dbUtil.createUser(name, email, password);
+  await dbUtil.createUser(name, email, password, res);
 });
 
 //login

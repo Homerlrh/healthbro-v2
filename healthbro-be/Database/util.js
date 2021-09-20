@@ -10,7 +10,7 @@ const authController = require("../controller/authController");
  * @param {string} password SignUp password
  * @returns {object} an object contain status code and message
  */
-exports.createUser = (name, email, password) => {
+exports.createUser = (name, email, password, res) => {
   userSchema.findOne({ email: email }, async (err, user) => {
     if (!user) {
       try {
