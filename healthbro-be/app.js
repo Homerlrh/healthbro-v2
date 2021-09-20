@@ -5,6 +5,7 @@ const express = require("express"),
   DB = require("./Database/db"),
   authRoute = require("./route/authRoute"),
   apiRoute = require("./route/apiRoute");
+const isTokenValid = require("./middleware/isTokenValid");
 const app = express();
 const port = process.env.PORT || "3333";
 
@@ -17,7 +18,7 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/auth", authRoute);
-app.use("/api", apiRoute);
+app.use("/api", isTokenValid, apiRoute);
 
 const server = http.createServer(app);
 server.listen(port, () => {
