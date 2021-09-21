@@ -1,31 +1,26 @@
-import "./App.css";
+import "./App.scss";
 import { Route, Switch, Redirect } from "react-router-dom";
+import * as Screen from "./Screen";
+import { Header, Footer, NavBar } from "./Screen/component";
 
 function App() {
-  // const click = async () => {
-  //   const body = {
-  //     email: "123@123.com",
-  //     password: "123321",
-  //   };
-  //   //const result = await axios.get(`http://localhost:3333`);
-  //   const result = await axios.post("http://localhost:3333/auth/login", body);
-  //   console.log(result);
-  // };
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ minHeight: "100vh", position: "relative" }}>
+      <Header />
+      <NavBar
+        links={[
+          { link: "", name: "Home" },
+          { link: "login", name: "About" },
+          { link: "signUp", name: "Plans" },
+        ]}
+      />
+      <Switch>
+        <Route path="/" exact component={Screen.Dashboard} />
+        <Route path="/login" component={Screen.Login} />
+        <Route path="/signUp" component={Screen.SignUp} />
+        <Redirect to="/not-found" />
+      </Switch>
+      <Footer />
     </div>
   );
 }

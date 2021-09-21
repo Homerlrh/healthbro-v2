@@ -1,8 +1,8 @@
 require("dotenv").config();
+require("./Database/db");
 const express = require("express"),
   http = require("http"),
   cors = require("cors"),
-  DB = require("./Database/db"),
   authRoute = require("./route/authRoute"),
   apiRoute = require("./route/apiRoute");
 const isTokenValid = require("./middleware/isTokenValid");
