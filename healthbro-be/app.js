@@ -18,7 +18,7 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/auth", authRoute);
-app.use("/api", isTokenValid, apiRoute);
+app.use("/api", apiRoute);
 
 const server = http.createServer(app);
 server.listen(port, () => {
