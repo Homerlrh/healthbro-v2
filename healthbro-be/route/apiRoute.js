@@ -14,10 +14,11 @@ router.get("/random", async (req, res, next) => {
 });
 
 //get recipes with dietary options
-router.get("/recipeSearch", isTokenValid, async (req, res, next) => {
+router.post("/recipeSearch", isTokenValid, async (req, res, next) => {
   const option = req.body;
   let query = "recipes/complexSearch??";
   for (const [key, value] of Object.entries(option)) {
+    if (key == "token") continue;
     query += `${key}=${value}&`;
   }
   const data = await apiController(query.slice(0, -1));
