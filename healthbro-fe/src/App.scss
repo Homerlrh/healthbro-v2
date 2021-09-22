@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Poppins");
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
 .s {
-  width: 500px !important;
+  width: 300px !important;
+  height: 650px !important;
   padding: 0 150px;
 }
 .slick-slide.slick-center {
@@ -13,13 +15,18 @@
   padding: 20px 0;
 }
 
+.slide {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .slick-center {
   transform: scale(1.08);
 }
 
 .slick-slide:not(.slick-active) {
   margin: 20px 0;
-  opacity: 0.8;
+  opacity: 0.7;
+  filter: blur(5px);
 }
 .slider {
   width: 50%;
@@ -68,13 +75,14 @@
 
 .navBar {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   div {
     box-sizing: border-box;
     padding: 0 10px;
   }
   div:nth-child(2) {
     text-align: center;
+
     a {
       padding: 0 10px;
     }
@@ -89,11 +97,18 @@
   a {
     color: #ff9900;
     font-weight: 500;
+    transition: 1s;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    transition: 1s;
   }
 }
 
 .inActive {
   color: lightgrey;
+  transition: 0.5s;
 }
 .inActive:hover {
   color: #000;
@@ -110,7 +125,9 @@
 }
 
 .container {
-  padding-bottom: 300px;
+  box-sizing: border-box;
+  margin-top: 20px;
+  padding-bottom: 115px;
   .dashboardUpper {
     background-repeat: no-repeat;
     background-position: 60%;
@@ -137,6 +154,7 @@
         box-sizing: border-box;
         padding: 10px 45px;
         border-radius: 25px;
+        transition: 0.5s;
       }
       a:hover {
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -150,11 +168,124 @@
 
   .dashboardLower {
     padding-top: 3%;
+    padding-bottom: 3%;
     margin: 0 auto;
-    width: 80%;
+    width: 60%;
   }
 }
 
 .abc button {
   background-color: #000;
+}
+
+.recipeCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid lightgrey;
+  border-radius: 15px;
+  max-height: 450px;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin-top: 100px;
+  img {
+    border-top-left-radius: 15px;
+    max-width: 100%;
+    object-fit: contain;
+    max-height: 30%;
+  }
+  .description {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 0 10px;
+    max-height: 50px;
+    p {
+      font-weight: 600;
+      max-width: 65%;
+      margin: unset;
+    }
+  }
+  .summary {
+    padding: 0 10px;
+    max-height: 125px;
+    overflow-y: hidden;
+  }
+
+  .viewRecipe {
+    background-color: #2ecc71;
+    color: #fff;
+    margin: 10px auto;
+    outline: none;
+    border: none;
+    width: 50%;
+    padding: 10px;
+    box-sizing: content-box;
+    border-radius: 25px;
+    transition: 0.5s;
+  }
+
+  .viewRecipe:hover {
+    transform: scale(1.1);
+    transition: 0.5s;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.login,
+.signUp {
+  background-color: #f0f8ff;
+  width: 60%;
+  margin: 5% auto;
+  border-radius: 15px;
+  box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  text-align: center;
+  font-family: "Poppins";
+  .userInput {
+    display: flex;
+    justify-content: center;
+    div {
+      display: flex;
+      align-items: center;
+      padding: 15px 30px;
+      margin-top: 20px;
+      width: 15%;
+    }
+    input {
+      margin-left: 10px;
+      font-size: 15px;
+      padding: 5px;
+    }
+  }
+  .loginButton {
+    padding: 15px 30px;
+    margin-top: 20px;
+    width: 15%;
+    background-color: #ff9900;
+    color: #fff;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    font-weight: 600;
+  }
+  .redirectionLink {
+    font-weight: 600;
+    a {
+      color: #000;
+      transition: 0.5s;
+    }
+    a:hover {
+      text-decoration: underline;
+      transition: 0.5s;
+    }
+  }
+}
+
+.passwordCheck {
+  border: 2px solid #ff9900;
+}
+
+.passwordNotMatch {
+  border: 2px solid red;
 }
