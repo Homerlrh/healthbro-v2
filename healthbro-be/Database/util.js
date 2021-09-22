@@ -28,7 +28,12 @@ exports.createUser = (name, email, password, res) => {
               userName: user.name,
               email: user.email,
             };
-            res.status(200).send(authController.generateToken(data));
+            res.status(200).send({
+              message: "User created",
+              userName: user.name,
+              email: user.email,
+              token: authController.generateToken(data),
+            });
           });
       } catch (error) {
         res.status(500).send(error);
@@ -60,6 +65,8 @@ exports.login = (email, password, res) => {
         };
         return res.status(200).send({
           message: "login successful",
+          userName: user.name,
+          email: user.email,
           token: authController.generateToken(data),
         });
       }
