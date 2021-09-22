@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { AiOutlineMail, AiOutlineEye } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
 import { AppContext } from "../context/AuthContext";
+import { useHistory } from "react-router";
 
 export default function _signUp() {
   const [userName, setUserName] = useState("");
@@ -11,6 +12,11 @@ export default function _signUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [inputType, setInputType] = useState("password");
   const context = useContext(AppContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) history.push("/recipeSearch");
+  }, []);
 
   const handleSignUp = async () => {
     if (confirmPassword === password) {

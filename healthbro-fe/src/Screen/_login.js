@@ -1,12 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { AiOutlineMail, AiOutlineEye } from "react-icons/ai";
 import { AppContext } from "../context/AuthContext";
+import { useHistory } from "react-router";
 export default function _login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [inputType, setInputType] = useState("password");
   const context = useContext(AppContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) history.push("/recipeSearch");
+  }, []);
 
   const handleLogin = async () => {
     const result = await axios.post("http://localhost:3333/auth/login", {
