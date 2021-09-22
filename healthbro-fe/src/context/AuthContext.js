@@ -19,10 +19,10 @@ const AuthContext = ({ children }) => {
         setEmail(data.email);
       });
     }
-  }, [token]);
+  }, [setToken]);
 
   return (
-    <AppContext.Provider value={{ email, setEmail, setToken }}>
+    <AppContext.Provider value={{ email, setEmail, token, setToken }}>
       <BrowserRouter>{children}</BrowserRouter>
     </AppContext.Provider>
   );
