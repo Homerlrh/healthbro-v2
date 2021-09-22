@@ -4,7 +4,7 @@ import { AppContext } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export default function _navigation({ links }) {
-  const { email } = useContext(AppContext);
+  const { email, setEmail, setToken } = useContext(AppContext);
   const history = useHistory();
   const linkGroup = links.map((ele, i) => (
     <NavLink
@@ -20,6 +20,8 @@ export default function _navigation({ links }) {
 
   const handleLogout = () => {
     localStorage.clear();
+    setEmail("");
+    setToken("");
     history.push("/");
   };
 

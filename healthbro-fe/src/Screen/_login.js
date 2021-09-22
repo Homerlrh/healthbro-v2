@@ -20,6 +20,7 @@ export default function _login() {
       password,
     });
     localStorage.setItem("token", result.data.token);
+    context.setToken(result.data.token);
     context.setEmail(result.data.email);
   };
 
