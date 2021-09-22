@@ -2,9 +2,9 @@ const express = require("express");
 const apiController = require("../controller/apiController");
 const tokenDecoder = require("../middleware/tokenDecoder");
 const dbUtil = require("../Database/util");
+const isTokenValid = require("../middleware/isTokenValid");
 
 const router = express.Router();
-
 //get random recipes to show
 //number of recipes come from the param
 router.get("/random", async (req, res, next) => {
@@ -14,7 +14,7 @@ router.get("/random", async (req, res, next) => {
 });
 
 //get recipes with dietary options
-router.get("/recipeSearch", async (req, res, next) => {
+router.get("/recipeSearch", isTokenValid, async (req, res, next) => {
   const option = req.body;
   let query = "recipes/complexSearch??";
   for (const [key, value] of Object.entries(option)) {
@@ -28,13 +28,13 @@ router.get("/recipeSearch", async (req, res, next) => {
 //post recipe ids into user collection
 router
   .route("/favouriteRecipe")
-  .get(tokenDecoder, async (req, res, next) => {
+  .get(isTokenValid, tokenDecoder, async (req, res, next) => {
     const recipes = await dbUtil.getUserRecipeList(res.user.userId);
     const query = `/recipes/informationBulk?ids=${recipes.join(",")}`;
     const data = await apiController(query);
     res.send(data);
   })
-  .post(tokenDecoder, (req, res, next) => {
+  .post(isTokenValid, tokenDecoder, (req, res, next) => {
     const { recipeId } = req.body;
     const userId = res.user.userId;
     dbUtil.addOrRemoveRecipes(userId, recipeId, res);
