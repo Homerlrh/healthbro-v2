@@ -3,7 +3,7 @@ const axios = require("axios");
 const baseURI = `https://api.spoonacular.com/`;
 
 /**
- * description
+ * controller to call api
  * @date 2021-09-18
  * @param {string} query
  * @returns {object}

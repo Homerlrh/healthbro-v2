@@ -1,8 +1,8 @@
 const express = require("express");
-const router = express.Router();
-
 const dbUtil = require("../Database/util");
 const isTokenValid = require("../middleware/isTokenValid");
+
+const router = express.Router();
 
 //sign up
 router.post("/signUp", async (req, res, next) => {
@@ -14,6 +14,12 @@ router.post("/signUp", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   await dbUtil.login(email, password, res);
+});
+
+//only user who is logged in can change password
+router.put("/changePassword", isTokenValid, async (req, res, next) => {
+  const { email, password, newPassword } = req.body;
+  await dbUtil.changePasswrod(email, password, newPassword, res);
 });
 
 module.exports = router;
