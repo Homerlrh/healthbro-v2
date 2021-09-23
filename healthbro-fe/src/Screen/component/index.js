@@ -4,5 +4,6 @@ export { default as NavBar } from "./_navigation";
 
 export { default as Carousel } from "./_carousel";
 export { default as Card } from "./_card";
+export { default as Modal } from "./_modal";
 
 export { default as AuthRoute } from "./_AuthRoute";

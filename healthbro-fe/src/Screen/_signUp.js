@@ -6,19 +6,29 @@ import { AppContext } from "../context/AuthContext";
 import { useHistory } from "react-router";
 
 export default function _signUp() {
+  //state variable
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  //password type
   const [inputType, setInputType] = useState("password");
+
+  //context
   const context = useContext(AppContext);
+
+  //react router
   const history = useHistory();
 
+  //useEffect for checking wheather the user is login
   useEffect(() => {
     if (localStorage.getItem("token")) history.push("/recipeSearch");
-  }, []);
+  });
 
+  //signUp handler
+  //onClick send a post request to the api
   const handleSignUp = async () => {
+    //if the comfirm password input equal to the password input then do the rest, else do nothing
     if (confirmPassword === password) {
       const body = {
         name: userName,
@@ -31,11 +41,14 @@ export default function _signUp() {
         body
       );
 
+      //get result after posting the data to the api
+      //set token and email for the rest of the page to know
       localStorage.setItem("token", result.data.token);
       context.setEmail(result.data.email);
     }
   };
 
+  //password type handler
   const showPassword = () => {
     inputType === "password" ? setInputType("text") : setInputType("password");
   };
@@ -76,6 +89,8 @@ export default function _signUp() {
           <label>
             <AiOutlineEye size={30} onClick={showPassword} />
           </label>
+
+          {/* conditional render classname base on password type */}
           <input
             className={
               password && confirmPassword && confirmPassword === password

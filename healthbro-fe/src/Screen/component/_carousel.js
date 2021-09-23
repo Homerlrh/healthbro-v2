@@ -36,13 +36,7 @@ export default function _carousel({ post }) {
 
   const cardGrp = post.map((ele, i) => (
     <div className="s" key={i}>
-      <Card
-        imgUrl={ele.image}
-        recipeName={ele.title}
-        description={ele.summary}
-        servings={ele.servings}
-        readyInMinuted={ele.readyInMinutes}
-      />
+      <Card recipe={ele} />
     </div>
   ));
   return (

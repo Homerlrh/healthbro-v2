@@ -1,35 +1,39 @@
 import React from "react";
 import { BsFillPersonFill, BsFillClockFill } from "react-icons/bs";
+import { Modal } from ".";
 
-export default function _card({
-  imgUrl,
-  recipeName,
-  description,
-  servings,
-  readyInMinuted,
-}) {
-  return (
+//recipe card
+export default function _card({ recipe }) {
+  //conditional render if the recipe prop is null
+  return recipe ? (
     <div className="slide recipeCard">
-      <img src={imgUrl} alt="recipeImg" />
+      <img src={recipe.image} alt="recipeImg" />
       <div className="description">
-        <p>{recipeName}</p>
+        <p>{recipe.title}</p>
         <div>
           <span style={{ marginRight: 10 }}>
             <BsFillPersonFill />
-            {servings}
+            {recipe.servings}
           </span>
           <span>
             <BsFillClockFill />
-            {readyInMinuted}
+            {recipe.readyInMinutes}
           </span>
         </div>
       </div>
-      <div
-        className="summary"
-        dangerouslySetInnerHTML={{ __html: description.slice(0, 200) + "..." }}
-      ></div>
-      {/* will be a modal */}
-      <button className="viewRecipe">View More</button>
+      {recipe.summary ? (
+        // use dangerouslySetInnerHTML due to the return json is a text with html tag
+        // slice is used because only want to display the first 200 words
+        <p
+          className="summary"
+          dangerouslySetInnerHTML={{
+            __html: recipe.summary.slice(0, 200) + "...",
+          }}
+        ></p>
+      ) : null}
+      <Modal info={recipe} />
     </div>
+  ) : (
+    <></>
   );
 }

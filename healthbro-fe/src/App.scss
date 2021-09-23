@@ -99,15 +99,15 @@
 
 .userStatus {
   padding-right: 20px;
-  a {
+  a,
+  .logoutButton {
     color: #ff9900;
     font-weight: 500;
     transition: 1s;
-  }
-
-  a:hover {
-    text-decoration: underline;
-    transition: 1s;
+    &:hover {
+      text-decoration: underline;
+      transition: 1s;
+    }
   }
 }
 
@@ -186,10 +186,10 @@
 .recipeCard {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   border: 1px solid lightgrey;
   border-radius: 15px;
-  max-height: 450px;
+  min-height: 450px;
   overflow: hidden;
   box-sizing: border-box;
   margin-top: 100px;
@@ -362,15 +362,22 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     .s {
       width: 70% !important;
-      height: 500px;
       text-align: left;
       margin: unset;
       padding: unset;
       img {
         width: 100%;
+      }
+    }
+
+    .recipeCard {
+      height: 500px !important;
+      justify-content: space-between;
+      img {
+        max-height: unset;
       }
     }
   }
@@ -387,4 +394,59 @@
 }
 .react-tag-input__tag__remove {
   background-color: #ff9900;
+}
+
+.mealPlanner {
+  background-color: #f0f8ff;
+  padding: 3% 0;
+  h1 {
+    font-size: 4em;
+    font-family: "DM Serif Display", sans-serif;
+    margin: unset;
+  }
+  .inputArea {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    label {
+      font-family: "Poppings";
+    }
+    section {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      input {
+        margin-top: 10px;
+        margin-right: 5px;
+        width: 30%;
+        font-size: 25px;
+        padding: 5px 20px;
+        border-radius: 20px;
+        border: 2px solid #ff9900;
+        outline: none;
+        transition: 0.5s;
+        &:focus {
+          transform: scale(1.1);
+          transition: 0.5s;
+        }
+      }
+      .searchButton {
+        padding: 10px;
+        box-sizing: border-box;
+        cursor: pointer;
+        border: 2px solid #ff9900;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        transition: 0.5s;
+        vertical-align: middle;
+        &:hover {
+          transform: scale(1.1);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          transition: 0.5s;
+        }
+      }
+    }
+  }
 }

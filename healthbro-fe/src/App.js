@@ -13,7 +13,6 @@ function App() {
         { link: "recipeSearch", name: "Recipe" },
         { link: "mealPlan", name: "Meal Plan" },
         { link: "favourite", name: "Saved" },
-        { link: "profile", name: "Profile" },
       ]
     : [
         { link: "", name: "Home" },
@@ -31,7 +30,6 @@ function App() {
         <AuthRoute path="/recipeSearch" component={Screen.RecipeSearch} />
         <AuthRoute path="/mealPlan" component={Screen.MealPlan} />
         <AuthRoute path="/favourite" component={Screen.Favourite} />
-        <AuthRoute path="/profile" component={Screen.Favourite} />
         <Redirect to="/not-found" />
       </Switch>
       <Footer />

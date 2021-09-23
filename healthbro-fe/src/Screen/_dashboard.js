@@ -6,21 +6,25 @@ import { Carousel } from "./component";
 import { useHistory } from "react-router-dom";
 
 export default function _dashboard() {
+  //state variable
   const [posts, setPosts] = useState([]);
+
+  //react router
   const history = useHistory();
 
+  //useEffect hook for displaying random three recipes on dashBoard
+  //recipes will change if the page is refresh
   useEffect(() => {
     async function getData() {
-      const recipes = await axios.get(`http://localhost:3333/api/random`, {
-        params: {
-          numberOfRecipes: 3,
-        },
-      });
+      const recipes = await axios.get(
+        `http://localhost:3333/api/random?numberOfRecipes=3`
+      );
       setPosts(recipes.data.recipes);
     }
     getData();
   }, [setPosts]);
 
+  //conditional redirect base on user login status
   const handleRedirect = () => {
     const token = localStorage.getItem("token");
     token ? history.push("/recipeSearch") : history.push("/signUp");
@@ -38,7 +42,9 @@ export default function _dashboard() {
             based upon your needs.
           </p>
           <br />
-          <a onClick={handleRedirect}>Start Searching</a>
+          <a href="/recipeSearch" onClick={handleRedirect}>
+            Start Searching
+          </a>
         </div>
         <img src={cookingHand} alt="cookingHand" />
       </div>
