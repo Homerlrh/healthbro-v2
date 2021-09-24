@@ -20,7 +20,7 @@ const isTokenValid = (req, res, next) => {
     }
   } else {
     //response if token is not included or empty in the request header
-    res.status(403).json("Please login or sign up an account to use, thanks!");
+    res.status(401).json("Please login or sign up an account to use, thanks!");
   }
 };
 
