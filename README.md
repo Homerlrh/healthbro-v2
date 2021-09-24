@@ -4,6 +4,9 @@ A recipe search engine that help user to decide what they like to eat
 visit the last version [here](https://healthbro.herokuapp.com)
 
 [Code for last version](https://github.com/cee-elle/fswd-agile-final-project)
+
+This project is build with MERN stack, the main purpose of this web application is to showcase what I can present in a week.
+
 ## Initial setup
 
 Get an API from [Here](https://spoonacular.com/food-api)
