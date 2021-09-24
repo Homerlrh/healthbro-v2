@@ -1,11 +1,20 @@
 import React from "react";
 import Modal from "react-modal";
-import { BsFillPersonFill, BsFillClockFill } from "react-icons/bs";
+import {
+  BsFillPersonFill,
+  BsFillClockFill,
+  BsFillStarFill,
+} from "react-icons/bs";
+import { useContext } from "react/cjs/react.development";
+import { AppContext } from "../../context/AuthContext";
 
 //display recipe data in modal form
-export default function _modal({ info }) {
+export default function _modal({ info, liked = false }) {
   //state for modal toggle
   const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  //context
+  const { apiCaller } = useContext(AppContext);
 
   //custome modal css
   //take it out from App.scss coz it is easier to manage
@@ -18,6 +27,7 @@ export default function _modal({ info }) {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       width: "80%",
+      borderRadius: 25,
     },
   };
 
@@ -52,6 +62,15 @@ export default function _modal({ info }) {
       <div>no instructions for this recipe yet</div>
     );
 
+  //like or unlike the recipe
+  const handleLike = async (id) => {
+    const result = await apiCaller.post("/api/favouriteRecipe", {
+      recipeId: id,
+    });
+    alert(result.data);
+    window.location.reload();
+  };
+
   //if the recipe info is not empty then return the component, until then component remain null
   return info ? (
     <div style={{ display: "flex" }}>
@@ -65,34 +84,46 @@ export default function _modal({ info }) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <div>
+        <div className="recipeTitle">
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>{info.title}</h2>
-          <span style={{ marginRight: 10 }}>
-            <BsFillPersonFill size={30} />
-            {info.servings}
-          </span>
-          <span>
-            <BsFillClockFill size={30} />
-            {info.readyInMinutes}
-          </span>
-        </div>
-        <div>
-          <label>Dietary Option</label>
-          {info.diets.map((ele, i) => (
-            <div key={i}>{ele}</div>
-          ))}
-        </div>
-        <div>
           <div>
-            <img width="100px" src={info.image} alt="recipeImage" />
-            <p dangerouslySetInnerHTML={{ __html: info.summary }}></p>
+            <span style={{ marginRight: 10 }}>
+              <BsFillPersonFill size={30} />
+              {info.servings}
+            </span>
+            <span>
+              <BsFillClockFill size={30} />
+              {info.readyInMinutes}
+            </span>
+            <span style={{ color: liked === true ? "#ff9900" : "" }}>
+              <BsFillStarFill
+                className="likedButton"
+                onClick={() => handleLike(info.id)}
+                size={30}
+              />
+            </span>
           </div>
         </div>
-        <div>
-          <h2>instructions</h2>
+        <div className="dietaryTag">
+          <h2>Dietary Option: </h2>
+          <section className="tags">
+            {info.diets.map((ele, i) => (
+              <p key={i}>{ele}</p>
+            ))}
+          </section>
+        </div>
+        <div className="recipeSummary">
+          <img className="recipeImage" src={info.image} alt="recipeImage" />
+          <p dangerouslySetInnerHTML={{ __html: info.summary }}></p>
+        </div>
+
+        <div className="recpieInstruction">
+          <h2>Instructions</h2>
           {instructions}
         </div>
-        <button onClick={closeModal}>close</button>
+        <button className="modalClose" onClick={closeModal}>
+          close
+        </button>
       </Modal>
     </div>
   ) : (

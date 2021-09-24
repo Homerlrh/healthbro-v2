@@ -3,7 +3,7 @@ import { BsFillPersonFill, BsFillClockFill } from "react-icons/bs";
 import { Modal } from ".";
 
 //recipe card
-export default function _card({ recipe }) {
+export default function _card({ recipe, liked }) {
   //conditional render if the recipe prop is null
   return recipe ? (
     <div className="slide recipeCard">
@@ -26,12 +26,13 @@ export default function _card({ recipe }) {
         // slice is used because only want to display the first 200 words
         <p
           className="summary"
+          style={{ margin: "unset" }}
           dangerouslySetInnerHTML={{
             __html: recipe.summary.slice(0, 200) + "...",
           }}
         ></p>
       ) : null}
-      <Modal info={recipe} />
+      <Modal info={recipe} liked={liked} />
     </div>
   ) : (
     <></>

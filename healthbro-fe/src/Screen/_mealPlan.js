@@ -15,7 +15,7 @@ export default function _mealPlan() {
 
   //handle api calling
   const handleSearch = async () => {
-    const result = await apiCaller.post("http://localhost:3333/api/mealPlan", {
+    const result = await apiCaller.post("/api/mealPlan", {
       targetCalories: calorie,
     });
     setMealPlan(result.data);
